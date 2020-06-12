@@ -3,9 +3,9 @@
 	"file": "print.css",
 	"sourceRoot": "/Users/admin/Iqbal/dastaniqbal.github.io",
 	"sources": [
-		"themes/hyde-hyde/assets/scss/print.scss",
-		"themes/hyde-hyde/assets/scss/hyde-hyde/_variables.scss",
-		"themes/hyde-hyde/assets/scss/hyde-hyde/_print.scss"
+		"assets/scss/print.scss",
+		"assets/scss/hyde-hyde/_variables.scss",
+		"assets/scss/hyde-hyde/_print.scss"
 	],
 	"sourcesContent": [
 		"@import \"hyde-hyde/variables\";\n@import 'hyde-hyde/print';\n",
