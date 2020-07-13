@@ -1,4 +1,10 @@
 [{
+    "title": "Test 2",
+    "date": "July 13, 2020",
+    "description": "Test 2 Description",
+    "body": "Test 2 Body ",
+    "ref": "/blog/2020-07-13-test-2/"
+  },{
     "title": "About",
     "date": "February 28, 2019",
     "description": "Hugo, the world’s fastest framework for building websites",
@@ -10,10 +16,4 @@
     "description": "",
     "body": "",
     "ref": "/contact/"
-  },{
-    "title": "Posts",
-    "date": "January 1, 0001",
-    "description": "",
-    "body": "",
-    "ref": "/blog/"
   }]
