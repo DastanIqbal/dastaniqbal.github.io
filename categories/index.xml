@@ -11,11 +11,29 @@
     
     
     <item>
-      <title>cat1, cat2</title>
-      <link>https://dastaniqbal.github.io/categories/cat1-cat2/</link>
+      <title>cat1</title>
+      <link>https://dastaniqbal.github.io/categories/cat1/</link>
       <pubDate>Mon, 13 Jul 2020 15:19:57 +0000</pubDate>
       
-      <guid>https://dastaniqbal.github.io/categories/cat1-cat2/</guid>
+      <guid>https://dastaniqbal.github.io/categories/cat1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cat2</title>
+      <link>https://dastaniqbal.github.io/categories/cat2/</link>
+      <pubDate>Mon, 13 Jul 2020 15:19:57 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/categories/cat2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Epoxy</title>
+      <link>https://dastaniqbal.github.io/categories/epoxy/</link>
+      <pubDate>Fri, 26 Jun 2020 12:49:56 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/categories/epoxy/</guid>
       <description></description>
     </item>
     

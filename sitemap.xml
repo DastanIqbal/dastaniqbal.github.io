@@ -8,7 +8,12 @@
   </url>
   
   <url>
-    <loc>https://dastaniqbal.github.io/categories/cat1-cat2/</loc>
+    <loc>https://dastaniqbal.github.io/categories/cat1/</loc>
+    <lastmod>2020-07-13T15:19:57+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/categories/cat2/</loc>
     <lastmod>2020-07-13T15:19:57+00:00</lastmod>
   </url>
   
@@ -40,6 +45,31 @@
   <url>
     <loc>https://dastaniqbal.github.io/blog/2020-07-13-test-2/</loc>
     <lastmod>2020-07-13T15:19:57+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/tags/airbnb/</loc>
+    <lastmod>2020-06-26T12:49:56+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/categories/epoxy/</loc>
+    <lastmod>2020-06-26T12:49:56+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/tags/epoxy/</loc>
+    <lastmod>2020-06-26T12:49:56+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/</loc>
+    <lastmod>2020-06-26T12:49:56+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dastaniqbal.github.io/tags/recyclerview/</loc>
+    <lastmod>2020-06-26T12:49:56+00:00</lastmod>
   </url>
   
   <url>

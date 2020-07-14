@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Iqbal Ahmed</title>
-    <link>https://dastaniqbal.github.io/blog/</link>
-    <description>Recent content in Blog on Iqbal Ahmed</description>
+    <title>epoxy on Iqbal Ahmed</title>
+    <link>https://dastaniqbal.github.io/tags/epoxy/</link>
+    <description>Recent content in epoxy on Iqbal Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Jul 2020 15:19:57 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2020 12:49:56 +0000</lastBuildDate>
     
-	<atom:link href="https://dastaniqbal.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dastaniqbal.github.io/tags/epoxy/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Test 2</title>
-      <link>https://dastaniqbal.github.io/blog/2020-07-13-test-2/</link>
-      <pubDate>Mon, 13 Jul 2020 15:19:57 +0000</pubDate>
-      
-      <guid>https://dastaniqbal.github.io/blog/2020-07-13-test-2/</guid>
-      <description>Test 2 Body </description>
-    </item>
     
     <item>
       <title>How to use Epoxy in Android (Part 1)</title>
