@@ -11,7 +11,7 @@
 We have written mapping strings xml file in which we were using demo.html file and using icon name as our key and hexcode as our value, but when we update icon name, icon name remain same but hexcode change.">
 <meta itemprop="datePublished" content="2020-08-16T12:29:17&#43;00:00" />
 <meta itemprop="dateModified" content="2020-08-16T12:29:17&#43;00:00" />
-<meta itemprop="wordCount" content="164">
+<meta itemprop="wordCount" content="179">
 
 
 
@@ -271,8 +271,9 @@ We have written mapping strings xml file in which we were using demo.html file a
     <div class="content">
       <p>We had the requirement to use <a href="icomoon.io">icomoon.io</a> font file. but we had the concerned when we update font file, its changed icon <code>hexcode</code>. and we wanted to use those <code>hexcode</code> everywhere in our project.</p>
 <p>We have written mapping strings xml file in which we were using <code>demo.html</code> file and using icon name as our key and <code>hexcode</code> as our value, but when we update icon name, icon name remain same but <code>hexcode</code> change. so We have written this script to generate <code>icons.xml</code> file. so We don&rsquo;t have to map each icon <code>hexcode</code> manually.</p>
+<p><code>demo.html</code> file generate when we select icon and press on Generate Font. Please take a look <a href="https://icomoon.io/app/#/select">here</a></p>
 <p>Install this dependency to run python script</p>
-<p><code>pip3 install bs4 pip3 install lxml</code></p>
+<p><code>pip3 install bs4 lxml</code></p>
 <p>Python Script<a href="https://gist.github.com/DastanIqbal/4ad18d173f191ce4d5c6da373a7ec8ec"> icons.py</a></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup <span style="color:#66d9ef">as</span> bs
