@@ -5,13 +5,49 @@
     <link>https://dastaniqbal.github.io/tags/</link>
     <description>Recent content in Tags on Iqbal Ahmed</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 26 Jun 2020 12:49:56 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2020 12:29:17 +0000</lastBuildDate>
     
 	<atom:link href="https://dastaniqbal.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>airbnb</title>
+      <title>Android</title>
+      <link>https://dastaniqbal.github.io/tags/android/</link>
+      <pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>automation</title>
+      <link>https://dastaniqbal.github.io/tags/automation/</link>
+      <pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/tags/automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://dastaniqbal.github.io/tags/python/</link>
+      <pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>script</title>
+      <link>https://dastaniqbal.github.io/tags/script/</link>
+      <pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/tags/script/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Airbnb</title>
       <link>https://dastaniqbal.github.io/tags/airbnb/</link>
       <pubDate>Fri, 26 Jun 2020 12:49:56 +0000</pubDate>
       
@@ -20,7 +56,7 @@
     </item>
     
     <item>
-      <title>epoxy</title>
+      <title>Epoxy</title>
       <link>https://dastaniqbal.github.io/tags/epoxy/</link>
       <pubDate>Fri, 26 Jun 2020 12:49:56 +0000</pubDate>
       
@@ -29,7 +65,7 @@
     </item>
     
     <item>
-      <title>recyclerview</title>
+      <title>RecyclerView</title>
       <link>https://dastaniqbal.github.io/tags/recyclerview/</link>
       <pubDate>Fri, 26 Jun 2020 12:49:56 +0000</pubDate>
       
