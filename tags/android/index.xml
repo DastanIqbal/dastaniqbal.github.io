@@ -21,6 +21,19 @@ We have written mapping strings xml file in which we were using demo.html file a
     </item>
     
     <item>
+      <title>How to use AirBnb Epoxy with ViewHolder (Part 2)</title>
+      <link>https://dastaniqbal.github.io/blog/2020-08-22-airbnb-epoxy-with-viewholder/</link>
+      <pubDate>Sat, 27 Jun 2020 10:06:50 +0000</pubDate>
+      
+      <guid>https://dastaniqbal.github.io/blog/2020-08-22-airbnb-epoxy-with-viewholder/</guid>
+      <description>Like in previous example we have seen how simple to list item using data class. In this post, we gonna use View Holder to list items on RecyclerView/EpoxyRecyclerView
+Listing with ViewHolder is similar like Recycler.ViewHolder but in Epoxy we extend to EpoxyModelWithHolder
+2. Show List using ViewHolder
+Here we need a helper class KotlinEpoxyHolder that we can get from epoxy sample or from our source code.
+package com.dastnaiqbal.epoxysample.helper import android.view.View import com.</description>
+    </item>
+    
+    <item>
       <title>How to use Epoxy in Android (Part 1)</title>
       <link>https://dastaniqbal.github.io/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/</link>
       <pubDate>Fri, 26 Jun 2020 12:49:56 +0000</pubDate>
