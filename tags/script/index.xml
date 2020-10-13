@@ -1,24 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>script on Iqbal Ahmed</title>
-    <link>https://dastaniqbal.github.io/tags/script/</link>
-    <description>Recent content in script on Iqbal Ahmed</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Aug 2020 12:29:17 +0000</lastBuildDate>
-    
-	<atom:link href="https://dastaniqbal.github.io/tags/script/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Convert icomoon.io Font  to Android icons.xml </title>
-      <link>https://dastaniqbal.github.io/blog/2020-08-16-convert-icomoon-io-font-to-android-icons-xml/</link>
-      <pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate>
-      
-      <guid>https://dastaniqbal.github.io/blog/2020-08-16-convert-icomoon-io-font-to-android-icons-xml/</guid>
-      <description>We had the requirement to use icomoon.io font file. but we had the concerned when we update font file, its changed icon hexcode. and we wanted to use those hexcode everywhere in our project.
-We have written mapping strings xml file in which we were using demo.html file and using icon name as our key and hexcode as our value, but when we update icon name, icon name remain same but hexcode change.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>script on Iqbal Ahmed</title><link>https://dastaniqbal.github.io/tags/script/</link><description>Recent content in script on Iqbal Ahmed</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 16 Aug 2020 12:29:17 +0000</lastBuildDate><atom:link href="https://dastaniqbal.github.io/tags/script/index.xml" rel="self" type="application/rss+xml"/><item><title>Convert icomoon.io Font to Android icons.xml</title><link>https://dastaniqbal.github.io/blog/2020-08-16-convert-icomoon-io-font-to-android-icons-xml/</link><pubDate>Sun, 16 Aug 2020 12:29:17 +0000</pubDate><guid>https://dastaniqbal.github.io/blog/2020-08-16-convert-icomoon-io-font-to-android-icons-xml/</guid><description>We had the requirement to use icomoon.io font file. but we had the concerned when we update font file, its changed icon hexcode. and we wanted to use those hexcode everywhere in our project.
+We have written mapping strings xml file in which we were using demo.html file and using icon name as our key and hexcode as our value, but when we update icon name, icon name remain same but hexcode change.</description></item></channel></rss>
