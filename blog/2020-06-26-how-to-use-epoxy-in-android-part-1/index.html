@@ -1,14 +1,278 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><title>How to use Epoxy in Android (Part 1) - Iqbal Ahmed</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.72.0"><meta itemprop=name content="How to use Epoxy in Android (Part 1)"><meta itemprop=description content="How to populate a simple list in Epoxy?"><meta itemprop=datePublished content="2020-06-26T12:49:56+00:00"><meta itemprop=dateModified content="2020-06-26T12:49:56+00:00"><meta itemprop=wordCount content="628"><meta itemprop=keywords content="Epoxy,Android,RecyclerView,Airbnb,"><meta property="og:title" content="How to use Epoxy in Android (Part 1)"><meta property="og:description" content="How to populate a simple list in Epoxy?"><meta property="og:type" content="article"><meta property="og:url" content="https://dastaniqbal.github.io/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/"><meta property="article:published_time" content="2020-06-26T12:49:56+00:00"><meta property="article:modified_time" content="2020-06-26T12:49:56+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="How to use Epoxy in Android (Part 1)"><meta name=twitter:description content="How to populate a simple list in Epoxy?"><link rel=stylesheet href=/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel=stylesheet href=/css/add-on.css></head><body><header id=site-header><nav id=site-nav><h1 class=nav-title><a href=/ class=nav>Blog</a></h1><menu id=site-nav-menu class="flyout-menu menu"><a href=/ class="nav link"><i class="fa fa-home"></i>Home</a>
-<a href=/about/ class="nav link"><i class="far fa-id-card"></i>About</a>
-<a href=/blog/ class="nav link"><i class="far fa-newspaper"></i>Blog</a>
-<a href=/categories/ class="nav link"><i class="fas fa-sitemap"></i>Categories</a>
-<a href=/contact/ class="nav link"><i class="far fa-envelope"></i>Contact</a>
-<a href=#share-menu class="nav share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
-<a href=#search-input class="nav search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a></menu>
-<a href=#search-input class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
-<a href=#share-menu class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
-<a href=#site-nav class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a></nav><menu id=search class=menu><input id=search-input class="search-input menu"></input><div id=search-results class="search-results menu"></div></menu><menu id=share-menu class="flyout-menu menu"><h1>Share Post</h1><a href="//twitter.com/share?text=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29&url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank rel=noopener class="nav share-btn twitter"><i class="fab fa-twitter"></i><p>&nbsp;Twitter</p></a><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank rel=noopener class="nav share-btn facebook"><i class="fab fa-facebook"></i><p>&nbsp;Facebook</p></a><a href="//www.reddit.com/submit?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn reddit"><i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn linkedin"><i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p></a><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&description=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn pinterest"><i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p></a><a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&body=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank class="nav share-btn email" data-proofer-ignore><i class="fas fa-envelope"></i><p>&nbsp;Email</p></a></menu></header><div id=wrapper><section id=site-intro><a href=/><img src=https://dastaniqbal.github.io/img/profile.jpg class=circle width=200 alt="Profile Pic"></a><header><h1>Iqbal Ahmed</h1></header><main><p>I develop <b>Android</b> Apps along with Backend<br>and My only LOVE is <b>Kotlin</b></p></main><footer><ul class=socnet-icons><li><a href=//github.com/DastanIqbal target=_blank rel=noopener title=GitHub class="fab fa-github"></a></li><li><a href=//linkedin.com/in/iqbalahmedandroid target=_blank rel=noopener title=LinkedIn class="fab fa-linkedin"></a></li><li><a href=mailto:ask2iqbal@gmail.com target=_blank title=Email class="far fa-envelope"></a></li></ul></footer></section><main id=site-main><article class=post><header><div class=title><h2><a href=/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/>How to use Epoxy in Android (Part 1)</a></h2><p>How to populate a simple list in Epoxy?</p></div><div class=meta><time class=published datetime="2020-06-26 12:49:56.412 +0000 UTC">June 26, 2020</time>
-<span class=author></span><p>3 minute read</p></div></header><section id=socnet-share><a href="//twitter.com/share?text=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29&url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank rel=noopener class="nav share-btn twitter"><i class="fab fa-twitter"></i><p>&nbsp;Twitter</p></a><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank rel=noopener class="nav share-btn facebook"><i class="fab fa-facebook"></i><p>&nbsp;Facebook</p></a><a href="//www.reddit.com/submit?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn reddit"><i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn linkedin"><i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p></a><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&description=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target=_blank rel=noopener class="nav share-btn pinterest"><i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p></a><a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&body=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target=_blank class="nav share-btn email" data-proofer-ignore><i class="fas fa-envelope"></i><p>&nbsp;Email</p></a></section><div class=content><p>Like automation is evolving in a different sector. how it&rsquo;s evolving in Android. As we know about autogenerated code where we use a bunch of annotations and its auto write code for you with the help of <code>kapt</code> and <code>annotationProcessor</code> We know many plugins which write boilerplate code for you For eg Dagger.</p><p>Same we are moving to declarative programming like <a href=https://developer.android.com/jetpack/compose>JetPack Compose</a> and <a href=https://fblitho.com/>Litho</a>. The same Airbnb changes the way to show the list by using <a href=https://github.com/airbnb/epoxy>Epoxy</a>. Indeed its a very robust library.</p><p>In this post, I am gonna show How can we populate a simple list using <a href=https://github.com/airbnb/epoxy>Epoxy</a>. In Epoxy, we got 2 core concepts Models and Controllers. Model can be your CustomView, Databinding(XML), Data Class, or ViewHolder. It&rsquo;s only responsibility to set data or handle CTA. Controller responsibility populate data on the list with the help of Model. Lets jump to coding</p><p>Before starting, Add these dependencies in <a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/build.gradle#L13>build.gradle</a></p><pre><code>buildscript {
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>How to use Epoxy in Android (Part 1) - Iqbal Ahmed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.72.0" /><meta itemprop="name" content="How to use Epoxy in Android (Part 1)">
+<meta itemprop="description" content="How to populate a simple list in Epoxy?">
+<meta itemprop="datePublished" content="2020-06-26T12:49:56&#43;00:00" />
+<meta itemprop="dateModified" content="2020-06-26T12:49:56&#43;00:00" />
+<meta itemprop="wordCount" content="628">
+
+
+
+<meta itemprop="keywords" content="Epoxy,Android,RecyclerView,Airbnb," /><meta property="og:title" content="How to use Epoxy in Android (Part 1)" />
+<meta property="og:description" content="How to populate a simple list in Epoxy?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dastaniqbal.github.io/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/" />
+<meta property="article:published_time" content="2020-06-26T12:49:56+00:00" />
+<meta property="article:modified_time" content="2020-06-26T12:49:56+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to use Epoxy in Android (Part 1)"/>
+<meta name="twitter:description" content="How to populate a simple list in Epoxy?"/>
+<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          
+            <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29&amp;url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;description=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://dastaniqbal.github.io/img/profile.jpg" class="circle" width="200" alt="Profile Pic" /></a>
+  <header>
+    <h1>Iqbal Ahmed</h1>
+  </header>
+  <main>
+    <p>I develop <b>Android</b> Apps along with Backend <br/>and My only LOVE is <b>Kotlin</b></p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+        <li><a href="//github.com/DastanIqbal" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/iqbalahmedandroid" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:ask2iqbal@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/">How to use Epoxy in Android (Part 1)</a></h2>
+    
+    
+      <p>How to populate a simple list in Epoxy?</p>
+    
+  </div>
+  <div class="meta">
+    <time class="published" datetime="2020-06-26 12:49:56.412 &#43;0000 UTC">
+      June 26, 2020
+    </time>
+    <span class="author"></span>
+    
+      <p>3 minute read</p>
+    
+  </div>
+</header>
+
+    <section id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29&amp;url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;title=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f&amp;description=How%20to%20use%20Epoxy%20in%20Android%20%28Part%201%29" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fdastaniqbal.github.io%2fblog%2f2020-06-26-how-to-use-epoxy-in-android-part-1%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </section>
+    
+
+    <div class="content">
+      <p>Like automation is evolving in a different sector. how it&rsquo;s evolving in Android. As we know about autogenerated code where we use a bunch of annotations and its auto write code for you with the help of <code>kapt</code> and <code>annotationProcessor</code> We know many plugins which write boilerplate code for you For eg Dagger.</p>
+<p>Same we are moving to declarative programming like <a href="https://developer.android.com/jetpack/compose">JetPack Compose</a> and <a href="https://fblitho.com/">Litho</a>. The same Airbnb changes the way to show the list by using <a href="https://github.com/airbnb/epoxy">Epoxy</a>. Indeed its a very robust library.</p>
+<p>In this post, I am gonna show How can we populate a simple list using <a href="https://github.com/airbnb/epoxy">Epoxy</a>. In Epoxy, we got 2 core concepts Models and Controllers. Model can be your CustomView, Databinding(XML), Data Class, or ViewHolder. It&rsquo;s only responsibility to set data or handle CTA. Controller responsibility populate data on the list with the help of Model. Lets jump to coding</p>
+<p>Before starting, Add these dependencies in <a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/build.gradle#L13">build.gradle</a></p>
+<pre><code>buildscript {
   repositories {
     mavenCentral()
    }
@@ -19,7 +283,8 @@
     classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.0'
   }
 }
-</code></pre><p>and these dependencies in<a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/build.gradle#L55> app/build.gradle</a></p><pre><code>dependencies {
+</code></pre><p>and these dependencies in<a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/build.gradle#L55"> app/build.gradle</a></p>
+<pre><code>dependencies {
   
   //...
   
@@ -27,7 +292,10 @@
   implementation &quot;com.airbnb.android:epoxy:$epoxyVersion&quot;
   kapt &quot;com.airbnb.android:epoxy-processor:$epoxyVersion&quot;
 }
-</code></pre><p>Let&rsquo;s try the Simple Example of Model and Controller</p><p><strong>1. Show List using Data Class</strong></p><p>Here we need a helper class <a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/helper/KotlinModel.kt>KotlinModel</a> that we can get from epoxy sample or from our source code.</p><pre><code>abstract class KotlinModel(
+</code></pre><p>Let&rsquo;s try the Simple Example of Model and Controller</p>
+<p><strong>1. Show List using Data Class</strong></p>
+<p>Here we need a helper class <a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/helper/KotlinModel.kt">KotlinModel</a> that we can get from epoxy sample or from our source code.</p>
+<pre><code>abstract class KotlinModel(
     @LayoutRes private val layoutRes: Int
 ) : EpoxyModel&lt;View&gt;() {
 
@@ -57,7 +325,9 @@
         }
     }
 }
-</code></pre><p>Once we add helper class then we just need to extend our data class and define our layout and all magic happens when we compile our code.</p><p>Layout <strong><a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/res/layout/itemdataclass.xml>itemdataclass.xml</a></strong></p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</code></pre><p>Once we add helper class then we just need to extend our data class and define our layout and all magic happens when we compile our code.</p>
+<p>Layout <strong><a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/res/layout/itemdataclass.xml">itemdataclass.xml</a></strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
@@ -75,7 +345,8 @@
         app:layout_constraintTop_toTopOf=&quot;parent&quot;
         tools:text=&quot;TextView&quot; /&gt;
 &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
-</code></pre><p>Epoxy Model: <strong><a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/model/ItemDataClass.kt>ItemDataClass.kt</a></strong></p><pre><code>class ItemDataClass(val text: String) : KotlinModel(R.layout.itemdataclass) {
+</code></pre><p>Epoxy Model: <strong><a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/model/ItemDataClass.kt">ItemDataClass.kt</a></strong></p>
+<pre><code>class ItemDataClass(val text: String) : KotlinModel(R.layout.itemdataclass) {
 
     val tv by bind&lt;TextView&gt;(R.id.tv)
 
@@ -87,7 +358,9 @@
     }
 
 }
-</code></pre><p>Once our data class ready then we can directly use it in Controller. Creating controller, it&rsquo;s very simple</p><p>Epoxy Controller: <strong><a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/SimpleDataController.kt>SimpleDataController.kt</a></strong></p><pre><code>class SimpleDataController : TypedEpoxyController&lt;List&lt;String&gt;&gt;() {
+</code></pre><p>Once our data class ready then we can directly use it in Controller. Creating controller, it&rsquo;s very simple</p>
+<p>Epoxy Controller: <strong><a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/SimpleDataController.kt">SimpleDataController.kt</a></strong></p>
+<pre><code>class SimpleDataController : TypedEpoxyController&lt;List&lt;String&gt;&gt;() {
     private val TAG = this::class.java.simpleName
 
     override fun buildModels(data: List&lt;String&gt;?) {
@@ -96,7 +369,10 @@
         }
     }
 }
-</code></pre><p>Here we have used TypedEpoxyController which is single Type controller, but if you have multiple types which you want to pass in the controller then you can use other classes Typed2EpoxyController, Typed3EpoxyController, and Typed4EpoxyController</p><p>And the last step to attach controller in <strong>Epoxy Recyclerview</strong></p><p>Layout: <strong><a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/res/layout/activity_main.xml>activity_main.xml</a></strong></p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</code></pre><p>Here we have used TypedEpoxyController which is single Type controller, but if you have multiple types which you want to pass in the controller then you can use other classes Typed2EpoxyController, Typed3EpoxyController, and Typed4EpoxyController</p>
+<p>And the last step to attach controller in <strong>Epoxy Recyclerview</strong></p>
+<p>Layout: <strong><a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/res/layout/activity_main.xml">activity_main.xml</a></strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
     android:layout_width=&quot;match_parent&quot;
@@ -109,7 +385,8 @@
         tools:itemCount=&quot;10&quot;
         tools:listitem=&quot;@layout/itemdataclass&quot; /&gt;
 &lt;/FrameLayout&gt;
-</code></pre><p>And <strong><a href=https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/MainActivity.kt>MainActivity.kt</a></strong></p><pre><code>class MainActivity : AppCompatActivity() {
+</code></pre><p>And <strong><a href="https://github.com/DastanIqbal/EpoxySample/blob/epoxy/dataclass/app/src/main/java/com/dastnaiqbal/epoxysample/MainActivity.kt">MainActivity.kt</a></strong></p>
+<pre><code>class MainActivity : AppCompatActivity() {
     val controller by lazy {
         SimpleDataController()
     }
@@ -129,7 +406,6 @@
         })
     }
 }
-<<<<<<< HEAD
 </code></pre><p>Congratulations You populated your first list in Epoxy using Dataclass</p>
 <p>In this post, we used <strong>Kotlin Data Class</strong> as an <strong>Epoxy Model</strong> and Simple Controller,</p>
 <p>In the Next post, we gonna use ViewHolder as an Epoxy Model and Instead of creating a separate controller, we  gonna use an extension method to populate data on Epoxy RecyclerView.</p>
@@ -440,20 +716,3 @@ if (!doNotTrack) {
     </div>
   </body>
 </html>
-=======
-</code></pre><p>Congratulations You populated your first list in Epoxy using Dataclass</p><p>In this post, we used <strong>Kotlin Data Class</strong> as an <strong>Epoxy Model</strong> and Simple Controller,</p><p>In the Next post, we gonna use ViewHolder as an Epoxy Model and Instead of creating a separate controller, we gonna use an extension method to populate data on Epoxy RecyclerView.</p><p>SourceCode Link: <a href=https://github.com/DastanIqbal/EpoxySample/tree/epoxy/dataclass>https://github.com/DastanIqbal/EpoxySample/tree/epoxy/dataclass</a></p><p>Happy Coding !!</p></div><footer><ul class=stats><li class=categories><ul><li><a class=article-terms-link href=/categories/epoxy/>Epoxy</a></li><li><a class=article-terms-link href=/categories/android/>Android</a></li></ul></li><li class=tags><ul><li><a class=article-terms-link href=/tags/epoxy/>Epoxy</a></li><li><a class=article-terms-link href=/tags/android/>Android</a></li><li><a class=article-terms-link href=/tags/recyclerview/>RecyclerView</a></li><li><a class=article-terms-link href=/tags/airbnb/>Airbnb</a></li></ul></li></ul></footer></article><article class=post><div><h2>Say something</h2><form id=post-js-form class=post-new-comment method=post><h5 class="post-reply-notice hidden"><span class=post-reply-arrow></span><span class=post-reply-name></span></h5><input type=hidden name=options[entryId] value=e5ade9d46bdcb738e2a830bb955c0d59>
-<input type=hidden name=fields[replyThread]>
-<input type=hidden name=fields[replyID]>
-<input type=hidden name=fields[replyName]>
-<input required name=fields[name] type=text placeholder="Your name (Required)">
-<input name=fields[website] type=hidden placeholder="Your website">
-<input name=fields[email] type=hidden placeholder="Your email address (Required)">
-<textarea required name=fields[body] placeholder="Your message. Feel free to use Markdown (Google 'Markdown Cheat Sheet')." rows=10></textarea>
-<input hidden name=options[reCaptcha][siteKey] value=6LevL8MZAAAAANSK97K7fsuvwaTqjtqUi1c71JbC>
-<input hidden name=options[reCaptcha][secret] value="NL+P1esF14LTofak+e68fuOjbGDMP9WDjbhUrRWhTGPEyKHGd8BIJEkpX9fGJmAmZdgIltbDJc0od2NU8dK43nZpZFVSS0Nc05kSmymrLuC2DApaPMgpZ26mYBcCaU9aRDZ2O58EhMQhhqxORI8QM5LF5dwIcC/ZU0epIHIuInSjo30a0PtnFGy7kRARDqzKhtD3v+sdhMaCZfMFhIxJUTgz6mkVXQkmT/qduv8QArIyyqOX4r8QEkQDOn8NZbnFujBMpWWmHsJJzbQ+Yd2T47NYUWlJRi234F3A+W4aYND8w/8ojnp0k2g7u7f71khDd1JI7sNO/ia88mfmIQlM0A=="><div class=g-recaptcha data-sitekey=6LevL8MZAAAAANSK97K7fsuvwaTqjtqUi1c71JbC></div><p class=post-submit-notice><strong class="post-submit-notice-text submit-success hidden">Thanks for your comment! It will be shown on the site once it has been approved.</strong>
-<strong class="post-submit-notice-text submit-failed hidden">Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong></p><input type=submit value=Submit class=button>
-<input type=submit value=Submitted class="hidden button" disabled>
-<input type=reset value=Reset class=button></form></div><div><h2>Comments</h2></div></article><div class=pagination><a href=/blog/2020-08-22-airbnb-epoxy-with-viewholder/ class=button><div class=next><div>How to use Epoxy with ViewHolder (Part 2)</div></div></a></div></main><section id=site-sidebar><section id=recent-posts><header><h1>Recent posts</h1></header><article class=mini-post><section></section><header><h2><a href=/blog/2020-09-05-how-to-use-epoxy-with-customview-part-4/>How to use Epoxy with CustomView (PART 4)</a></h2><time class=published datetime>September 5, 2020</time></header></article><article class=mini-post><section></section><header><h2><a href=/blog/2020-08-16-convert-icomoon-io-font-to-android-icons-xml/>Convert icomoon.io Font to Android icons.xml</a></h2><time class=published datetime>August 16, 2020</time></header></article><article class=mini-post><section></section><header><h2><a href=/blog/2020-08-28-how-to-use-epoxy-with-databinding-part-3/>How to use Epoxy with Databinding (PART 3)</a></h2><time class=published datetime>June 28, 2020</time></header></article><article class=mini-post><section></section><header><h2><a href=/blog/2020-08-22-airbnb-epoxy-with-viewholder/>How to use Epoxy with ViewHolder (Part 2)</a></h2><time class=published datetime>June 27, 2020</time></header></article><article class=mini-post><section></section><header><h2><a href=/blog/2020-06-26-how-to-use-epoxy-in-android-part-1/>How to use Epoxy in Android (Part 1)</a></h2><time class=published datetime>June 26, 2020</time></header></article><footer><a href=/blog/ class=button>See more</a></footer></section><section id=categories><header><h1><a href=/categories>Categories</a></h1></header><ul><li><a href=/categories/android/>android<span class=count>5</span></a><li><a href=/categories/epoxy/>epoxy<span class=count>4</span></a><li><a href=/categories/automation/>automation<span class=count>1</span></a><li><a href=/categories/python/>python<span class=count>1</span></a><li><a href=/categories/script/>script<span class=count>1</span></a></li></ul></section><section id=mini-bio><header><h1>About</h1></header><p>I develop <b>Android</b> Apps along with Backend<br>and My only LOVE is <b>Kotlin</b></p><footer><a href=/about class=button>Learn More</a></footer></section></section><footer id=site-footer><ul class=socnet-icons><li><a href=//github.com/DastanIqbal target=_blank rel=noopener title=GitHub class="fab fa-github"></a></li><li><a href=//linkedin.com/in/iqbalahmedandroid target=_blank rel=noopener title=LinkedIn class="fab fa-linkedin"></a></li><li><a href=mailto:ask2iqbal@gmail.com target=_blank title=Email class="far fa-envelope"></a></li></ul><p class=copyright>&copy; 2020
-Iqbal Ahmed
-.<br>Theme: <a href=https://github.com/pacollins/hugo-future-imperfect-slim target=_blank rel=noopener>Hugo Future Imperfect Slim</a><br>A <a href=https://html5up.net/future-imperfect target=_blank rel=noopener>HTML5 UP port</a> | Powered by <a href=https://gohugo.io/ title=0.72.0 target=_blank rel=noopener>Hugo</a></p></footer><a id=back-to-top href=# class="fas fa-arrow-up fa-2x"></a><script src=/js/highlight.js></script><script>hljs.initHighlightingOnLoad();</script><script src=/js/bundle.min.6f5c4053cb6543b40cde4b88cf14eac1cf031dd6e51fbf58eb4a7c48df9464ce.js integrity="sha256-b1xAU8tlQ7QM3kuIzxTqwc8DHdblH79Y60p8SN+UZM4="></script><script src=/js/add-on.js></script><script src=https://www.google.com/recaptcha/api.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-84856101-2','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></div></body></html>
->>>>>>> 4fdf9fb4facecbc6bee99201d56a0dc68d698eee
