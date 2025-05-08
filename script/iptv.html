@@ -86,9 +86,9 @@
 
       const mac = data.slice(offset, offset + 32);
 
-      const key = await deriveKey(password, salt);
-      const hmacKey = await deriveKey(password, passwordVerifier);
-
+      const key = await deriveKey(password, salt, "AES-CBC", ["decrypt"]);
+      const hmacKey = await deriveKey(password, passwordVerifier, "HMAC", ["sign"]);
+      
       const dataForMac = data.slice(0, data.length - 32);
       const macCalc = await crypto.subtle.sign(
         { name: "HMAC" },
@@ -109,32 +109,35 @@
       return new TextDecoder().decode(decrypted);
     }
 
-    async function deriveKey(password, salt) {
-      const enc = new TextEncoder();
-      const keyMaterial = await crypto.subtle.importKey(
-        "raw",
-        enc.encode(password),
-        { name: "PBKDF2" },
-        false,
-        ["deriveKey"]
-      );
+  async function deriveKey(password, salt, algorithm, usages) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(password),
+      { name: "PBKDF2" },
+      false,
+      ["deriveKey"]
+    );
+  
+    const derivedAlgo =
+      algorithm === "HMAC"
+        ? { name: "HMAC", hash: "SHA-256", length: 256 }
+        : { name: "AES-CBC", length: 256 };
+  
+    return crypto.subtle.deriveKey(
+      {
+        name: "PBKDF2",
+        salt: salt,
+        iterations: 10000,
+        hash: "SHA-1"
+      },
+      keyMaterial,
+      derivedAlgo,
+      false,
+      usages
+    );
+  }
 
-      return crypto.subtle.deriveKey(
-        {
-          name: "PBKDF2",
-          salt: salt,
-          iterations: 10000,
-          hash: "SHA-1"
-        },
-        keyMaterial,
-        {
-          name: "AES-CBC",
-          length: 256
-        },
-        false,
-        ["decrypt"]
-      );
-    }
 
     function equalBuffers(buf1, buf2) {
       if (buf1.length !== buf2.length) return false;
