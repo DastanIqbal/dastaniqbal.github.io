@@ -39,10 +39,6 @@ async function deriveKey(password, salt, algorithm, usages) {
   );
 }
 
-function decodeBase64(str) {
-  return Uint8Array.from(atob(str), c => c.charCodeAt(0));
-}
-
 function parseCiphertext(data) {
   const version = data[0];
   const options = data[1];
@@ -80,8 +76,17 @@ function getDataForMac(parsed) {
   return data;
 }
 
+function decodeBase64(str) {
+  return Uint8Array.from(atob(str), c => c.charCodeAt(0));
+}
+
+function fixBase64(str) {
+  return str.replace(/-/g, '+').replace(/_/g, '/').padEnd(str.length + (4 - str.length % 4) % 4, '=');
+}
+
 async function decryptBase64Cipher(ciphertextB64, password) {
-  const data = decodeBase64(ciphertextB64);
+  const fixedBase64 = fixBase64(ciphertextB64);
+  const data = decodeBase64(fixedBase64);
   const parsed = parseCiphertext(data);
 
   if (!parsed.isEncrypted) throw new Error("Data is not password-encrypted");
