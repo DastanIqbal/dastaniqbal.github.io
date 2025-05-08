@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Decrypt Ciphertext</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    textarea, input {
+      width: 100%;
+      font-family: monospace;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+    }
+    .result {
+      white-space: pre-wrap;
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Decrypt Encrypted Ciphertext (Kotlin-compatible)</h2>
+
+  <label for="cipherText">Base64 Ciphertext:</label>
+  <textarea id="cipherText" rows="10"></textarea>
+
+  <label for="password">Password:</label>
+  <input id="password" type="text" />
+
+  <button onclick="handleDecrypt()">Decrypt</button>
+
+  <h3>Decrypted Result:</h3>
+  <div id="output" class="result"></div>
+
+  <script>
+    async function handleDecrypt() {
+      const b64 = document.getElementById("cipherText").value.trim();
+      const password = document.getElementById("password").value;
+      const output = document.getElementById("output");
+
+      try {
+        const result = await decryptCiphertext(b64, password);
+        output.textContent = result;
+      } catch (e) {
+        output.textContent = "Error: " + e.message;
+      }
+    }
+
+    async function decryptCiphertext(cipherTextB64, password) {
+      const data = Uint8Array.from(atob(cipherTextB64), c => c.charCodeAt(0));
+
+      const version = data[0];
+      const options = data[1];
+      const isEncryptedWithPassword = (options & 1) === 1;
+      const offsetBase = isEncryptedWithPassword ? 66 : 50;
+
+      if (data.length < offsetBase) {
+        throw new Error("Data too short.");
+      }
+
+      let offset = 2;
+      let salt, passwordVerifier;
+      if (isEncryptedWithPassword) {
+        salt = data.slice(offset, offset + 8);
+        offset += 8;
+        passwordVerifier = data.slice(offset, offset + 8);
+        offset += 8;
+      }
+
+      const iv = data.slice(offset, offset + 16);
+      offset += 16;
+
+      const cipherTextLength = data.length - offset - 32;
+      const ciphertext = data.slice(offset, offset + cipherTextLength);
+      offset += cipherTextLength;
+
+      const mac = data.slice(offset, offset + 32);
+
+      const key = await deriveKey(password, salt);
+      const hmacKey = await deriveKey(password, passwordVerifier);
+
+      const dataForMac = data.slice(0, data.length - 32);
+      const macCalc = await crypto.subtle.sign(
+        { name: "HMAC" },
+        hmacKey,
+        dataForMac
+      );
+
+      if (!equalBuffers(new Uint8Array(macCalc), mac)) {
+        throw new Error("MAC check failed.");
+      }
+
+      const decrypted = await crypto.subtle.decrypt(
+        { name: "AES-CBC", iv: iv },
+        key,
+        ciphertext
+      );
+
+      return new TextDecoder().decode(decrypted);
+    }
+
+    async function deriveKey(password, salt) {
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+      );
+
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: salt,
+          iterations: 10000,
+          hash: "SHA-1"
+        },
+        keyMaterial,
+        {
+          name: "AES-CBC",
+          length: 256
+        },
+        false,
+        ["decrypt"]
+      );
+    }
+
+    function equalBuffers(buf1, buf2) {
+      if (buf1.length !== buf2.length) return false;
+      for (let i = 0; i < buf1.length; i++) {
+        if (buf1[i] !== buf2[i]) return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
