@@ -138,7 +138,9 @@ async function startProcess() {
       body: formData
     });
 
-    const cipherText = await apiRes.json().data;
+    const text = await apiRes.text();
+    const dataRes = JSON.parse(text);
+    const cipherText = dataRes.data;
     document.getElementById("ciphertext").value = cipherText;
 
     const password = document.getElementById("password").value;
