@@ -89,7 +89,6 @@ function fixBase64(str) {
 }
 
 async function decryptBase64Cipher(ciphertextB64, password) {
-  // const fixedBase64 = fixBase64(ciphertextB64);
   const data = decodeBase64(ciphertextB64);
   const parsed = parseCiphertext(data);
 
@@ -124,7 +123,7 @@ async function startProcess() {
     const proxy = "https://corsproxy.io/?url=";
     const hostUrl = proxy + githubJson.host;
 
-    output.textContent = `Calling API at ${hostUrl}...`;
+    // output.textContent = `Calling API at ${hostUrl}...`;
 
     const formData = new URLSearchParams();
     formData.append("username", "36492275858");
