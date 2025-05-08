@@ -1,151 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Decrypt Ciphertext</title>
+  <meta charset="UTF-8">
+  <title>Decrypt API Response</title>
   <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      max-width: 700px;
-      margin: auto;
-    }
-    textarea, input {
-      width: 100%;
-      font-family: monospace;
-      margin-top: 5px;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 10px 20px;
-    }
-    .result {
-      white-space: pre-wrap;
-      background: #f4f4f4;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
+    body { font-family: sans-serif; padding: 20px; }
+    pre { background: #f4f4f4; padding: 15px; }
+    button { padding: 10px 15px; margin-top: 15px; }
   </style>
 </head>
 <body>
 
-  <h2>Decrypt Encrypted Ciphertext (Kotlin-compatible)</h2>
+<h2>API Decryption Flow</h2>
 
-  <label for="cipherText">Base64 Ciphertext:</label>
-  <textarea id="cipherText" rows="10"></textarea>
+<button onclick="startProcess()">Fetch, Call, and Decrypt</button>
 
-  <label for="password">Password:</label>
-  <input id="password" type="text" />
+<h3>Decrypted Response:</h3>
+<pre id="output">Waiting...</pre>
 
-  <button onclick="handleDecrypt()">Decrypt</button>
+<!-- Hidden fields -->
+<input type="hidden" id="password" value="yX5t[2N7ndG$;a=P" />
+<input type="hidden" id="ciphertext" />
 
-  <h3>Decrypted Result:</h3>
-  <div id="output" class="result"></div>
+<script>
+async function deriveKey(password, salt, algorithm, usages) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(password), { name: "PBKDF2" }, false, ["deriveKey"]
+  );
 
-  <script>
-    async function handleDecrypt() {
-      const b64 = document.getElementById("cipherText").value.trim();
-      const password = document.getElementById("password").value;
-      const output = document.getElementById("output");
+  const derivedAlgo = algorithm === "HMAC"
+    ? { name: "HMAC", hash: "SHA-256", length: 256 }
+    : { name: "AES-CBC", length: 256 };
 
-      try {
-        const result = await decryptCiphertext(b64, password);
-        output.textContent = result;
-      } catch (e) {
-        output.textContent = "Error: " + e.message;
-      }
-    }
+  return crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt, iterations: 10000, hash: "SHA-1" },
+    keyMaterial, derivedAlgo, false, usages
+  );
+}
 
-    async function decryptCiphertext(cipherTextB64, password) {
-      const data = Uint8Array.from(atob(cipherTextB64), c => c.charCodeAt(0));
+function decodeBase64(str) {
+  return Uint8Array.from(atob(str), c => c.charCodeAt(0));
+}
 
-      const version = data[0];
-      const options = data[1];
-      const isEncryptedWithPassword = (options & 1) === 1;
-      const offsetBase = isEncryptedWithPassword ? 66 : 50;
+function parseCiphertext(data) {
+  const version = data[0];
+  const options = data[1];
+  const isEncrypted = (options & 1) === 1;
+  let offset = 2;
+  let salt = null, passwordVerifier = null;
 
-      if (data.length < offsetBase) {
-        throw new Error("Data too short.");
-      }
-
-      let offset = 2;
-      let salt, passwordVerifier;
-      if (isEncryptedWithPassword) {
-        salt = data.slice(offset, offset + 8);
-        offset += 8;
-        passwordVerifier = data.slice(offset, offset + 8);
-        offset += 8;
-      }
-
-      const iv = data.slice(offset, offset + 16);
-      offset += 16;
-
-      const cipherTextLength = data.length - offset - 32;
-      const ciphertext = data.slice(offset, offset + cipherTextLength);
-      offset += cipherTextLength;
-
-      const mac = data.slice(offset, offset + 32);
-
-      const key = await deriveKey(password, salt, "AES-CBC", ["decrypt"]);
-      const hmacKey = await deriveKey(password, passwordVerifier, "HMAC", ["sign"]);
-      
-      const dataForMac = data.slice(0, data.length - 32);
-      const macCalc = await crypto.subtle.sign(
-        { name: "HMAC" },
-        hmacKey,
-        dataForMac
-      );
-
-      if (!equalBuffers(new Uint8Array(macCalc), mac)) {
-        throw new Error("MAC check failed.");
-      }
-
-      const decrypted = await crypto.subtle.decrypt(
-        { name: "AES-CBC", iv: iv },
-        key,
-        ciphertext
-      );
-
-      return new TextDecoder().decode(decrypted);
-    }
-
-  async function deriveKey(password, salt, algorithm, usages) {
-    const enc = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      "raw",
-      enc.encode(password),
-      { name: "PBKDF2" },
-      false,
-      ["deriveKey"]
-    );
-  
-    const derivedAlgo =
-      algorithm === "HMAC"
-        ? { name: "HMAC", hash: "SHA-256", length: 256 }
-        : { name: "AES-CBC", length: 256 };
-  
-    return crypto.subtle.deriveKey(
-      {
-        name: "PBKDF2",
-        salt: salt,
-        iterations: 10000,
-        hash: "SHA-1"
-      },
-      keyMaterial,
-      derivedAlgo,
-      false,
-      usages
-    );
+  if (isEncrypted) {
+    salt = data.slice(offset, offset + 8); offset += 8;
+    passwordVerifier = data.slice(offset, offset + 8); offset += 8;
   }
 
+  const iv = data.slice(offset, offset + 16); offset += 16;
+  const ciphertext = data.slice(offset, data.length - 32);
+  const mac = data.slice(data.length - 32);
 
-    function equalBuffers(buf1, buf2) {
-      if (buf1.length !== buf2.length) return false;
-      for (let i = 0; i < buf1.length; i++) {
-        if (buf1[i] !== buf2[i]) return false;
-      }
-      return true;
-    }
-  </script>
+  return { version, options, isEncrypted, salt, passwordVerifier, iv, ciphertext, mac };
+}
+
+function getDataForMac(parsed) {
+  const headerLen = 2;
+  const extra = parsed.isEncrypted ? (8 + 8) : 0;
+  const len = headerLen + extra + 16 + parsed.ciphertext.length;
+  const data = new Uint8Array(len);
+  let offset = 0;
+
+  data[offset++] = parsed.version;
+  data[offset++] = parsed.options;
+  if (parsed.isEncrypted) {
+    data.set(parsed.salt, offset); offset += 8;
+    data.set(parsed.passwordVerifier, offset); offset += 8;
+  }
+  data.set(parsed.iv, offset); offset += 16;
+  data.set(parsed.ciphertext, offset);
+  return data;
+}
+
+async function decryptBase64Cipher(ciphertextB64, password) {
+  const data = decodeBase64(ciphertextB64);
+  const parsed = parseCiphertext(data);
+
+  if (!parsed.isEncrypted) throw new Error("Data is not password-encrypted");
+
+  const key = await deriveKey(password, parsed.salt, "AES-CBC", ["decrypt"]);
+  const hmacKey = await deriveKey(password, parsed.passwordVerifier, "HMAC", ["sign"]);
+
+  const dataForMac = getDataForMac(parsed);
+  const calculatedMac = new Uint8Array(await crypto.subtle.sign("HMAC", hmacKey, dataForMac));
+
+  if (!calculatedMac.every((b, i) => b === parsed.mac[i])) {
+    throw new Error("MAC verification failed.");
+  }
+
+  const decrypted = await crypto.subtle.decrypt(
+    { name: "AES-CBC", iv: parsed.iv },
+    key,
+    parsed.ciphertext
+  );
+
+  return new TextDecoder().decode(decrypted);
+}
+
+async function startProcess() {
+  const output = document.getElementById("output");
+  output.textContent = "Fetching host from GitHub...";
+
+  try {
+    const githubRes = await fetch("https://raw.githubusercontent.com/bhhoomas/surfix/refs/heads/main/readme_mkpro");
+    const githubJson = await githubRes.json();
+    const hostUrl = githubJson.host;
+
+    output.textContent = `Calling API at ${hostUrl}...`;
+
+    const formData = new URLSearchParams();
+    formData.append("username", "36492275858");
+    formData.append("mac", "02:48:A5:B1:49:44");
+    formData.append("imei", "12345678");
+    formData.append("app", "istar_pro_max");
+    formData.append("deviceinfo", "SM-G996B,samsung,5.4.61-20701476-abG996BXXU1AUAB,30,2404.2,92.99.106.126,192.168.1.15,fe80::84c3:75ff:fe69:9901%dummy0");
+
+    const apiRes = await fetch(hostUrl, {
+      method: "POST",
+      headers: {
+        "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; SM-G996B Build/RP1A.200720.012)",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: formData
+    });
+
+    const cipherText = await apiRes.text();
+    document.getElementById("ciphertext").value = cipherText;
+
+    const password = document.getElementById("password").value;
+    output.textContent = "Decrypting response...";
+
+    const decrypted = await decryptBase64Cipher(cipherText, password);
+    output.textContent = decrypted;
+  } catch (err) {
+    output.textContent = "Error: " + err.message;
+  }
+}
+</script>
+
 </body>
 </html>
