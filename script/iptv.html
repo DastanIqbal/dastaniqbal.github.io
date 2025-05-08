@@ -85,8 +85,8 @@ function fixBase64(str) {
 }
 
 async function decryptBase64Cipher(ciphertextB64, password) {
-  const fixedBase64 = fixBase64(ciphertextB64);
-  const data = decodeBase64(fixedBase64);
+  // const fixedBase64 = fixBase64(ciphertextB64);
+  const data = decodeBase64(ciphertextB64);
   const parsed = parseCiphertext(data);
 
   if (!parsed.isEncrypted) throw new Error("Data is not password-encrypted");
@@ -138,7 +138,7 @@ async function startProcess() {
       body: formData
     });
 
-    const cipherText = await apiRes.text();
+    const cipherText = await apiRes.json().data;
     document.getElementById("ciphertext").value = cipherText;
 
     const password = document.getElementById("password").value;
