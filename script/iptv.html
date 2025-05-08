@@ -115,7 +115,7 @@ async function decryptBase64Cipher(ciphertextB64, password) {
 
 async function startProcess() {
   const output = document.getElementById("output");
-  output.textContent = "Fetching host from GitHub...";
+  output.textContent = "Fetching...";
 
   try {
     const githubRes = await fetch("https://raw.githubusercontent.com/bhhoomas/surfix/refs/heads/main/readme_mkpro");
@@ -123,7 +123,7 @@ async function startProcess() {
     const proxy = "https://corsproxy.io/?url=";
     const hostUrl = proxy + githubJson.host;
 
-    // output.textContent = `Calling API at ${hostUrl}...`;
+    output.textContent = `Calling API...`;
 
     const formData = new URLSearchParams();
     formData.append("username", "36492275858");
