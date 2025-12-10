@@ -121,7 +121,7 @@ async function startProcess() {
     const githubRes = await fetch("https://raw.githubusercontent.com/bhhoomas/surfix/refs/heads/main/readme_mkpro");
     const githubJson = await githubRes.json();
     const proxy = "https://corsproxy.io/?url=";
-    const hostUrl = proxy + githubJson.host;
+    const hostUrl = githubJson.host;
 
     output.textContent = `Calling API...`;
 
