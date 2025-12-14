@@ -123,27 +123,28 @@ async function startProcess() {
     const proxy = "https://corsproxy.io/?url=";
     const hostUrl = proxy + githubJson.host;
 
-    output.textContent = `Calling API...`;
+    // output.textContent = `Calling API...`;
 
-    const formData = new URLSearchParams();
-    formData.append("username", "76809211053");
-    formData.append("mac", "02:48:A5:B1:49:44");
-    formData.append("imei", "12345678");
-    formData.append("app", "istar_pro_max");
-    formData.append("deviceinfo", "SM-G996B,samsung,5.4.61-20701476-abG996BXXU1AUAB,30,2404.2,92.99.106.126,192.168.1.15,fe80::84c3:75ff:fe69:9901%dummy0");
+    // const formData = new URLSearchParams();
+    // formData.append("username", "76809211053");
+    // formData.append("mac", "02:48:A5:B1:49:44");
+    // formData.append("imei", "12345678");
+    // formData.append("app", "istar_pro_max");
+    // formData.append("deviceinfo", "SM-G996B,samsung,5.4.61-20701476-abG996BXXU1AUAB,30,2404.2,92.99.106.126,192.168.1.15,fe80::84c3:75ff:fe69:9901%dummy0");
 
-    const apiRes = await fetch(hostUrl, {
-      method: "POST",
-      headers: {
-        "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; SM-G996B Build/RP1A.200720.012)",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: formData
-    });
+    // const apiRes = await fetch(hostUrl, {
+      // method: "POST",
+      // headers: {
+        // "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; SM-G996B Build/RP1A.200720.012)",
+        // "Content-Type": "application/x-www-form-urlencoded"
+      // },
+      // body: formData
+    // });
 
-    const text = await apiRes.text();
-    const dataRes = JSON.parse(text);
-    const cipherText = dataRes.data;
+    // const text = await apiRes.text();
+    // const dataRes = JSON.parse(text);
+    // const cipherText = dataRes.data;
+    const cipherText = "AwGK7bS1Vm9yNlN0/9K+W3omFpScEFg6RBNvfcwJRnWa3DDKI2yhNKhCdnWcnXsDdmaobPJMQa9G7ESaOIUk5DogoKt5tI/TV3DKqGGJEIUPr50UFdqCzMcRLoCJWoZ+n9AIi3sniGiqHWwWVo118wXGxlq3SdHzCVJtHhg7+BVJsbnHVJrAKh25S3JDoSYW47qzanRSZ3+TnSMYP2yTkDO8CE5PmUdzp8I95GhOM77V4sgF5l+HEp4Gd/8XqerfaGn01QrCbY/165vq/hocUU+2Y2gC3GVsNXiptFtMt5vcNP7Fp7j2X3XOi9u7hmljl4HOswfSSE6lKHOInNbWUP9wDFcToOZfseH5s2dLYOJXHRMvjWKaPc2SAL2f2RAAvcjaxd3VObcEuThdRVhuzk8d2wmkCOLwqSaWkSoRVUaYwYIB17MdqmFNk1uw4R/uwtjiajm85eBa0G6gT/rJ+ageNodP/MgoDbpkOVTVcjjsienGU2jwddrOKzXqrCB603yO2DDAkFprDzpKEzyjou+40NQU4A9jkIFwwgIAdd0NLKyN2Ghfr6THckkcs3UwFfIFm7NqFYtxLNTWOIxR6iFIdc2WQ/1Kldn3wS+gkWpWYrcsQoNvnePPSzU910sFNNBZAjFCZGQRq83I40T27HL4rxGZaxmUgbZORKJf83x7l0tDsEegM6FmmouBNzII6xM1KcSZHesdCMvDsIOYOdlRcatC9YzK6rhaO0YbAgkBemn0sr1k30Na+IEPbAwSM1KrTjcpt69FK4pfSuttokCmgoKJOvZkcMHJEVYFSKvcTeAKIpLM27Hks8TXlDXD4OJyEvqUtJu1Ej0YjoTPDQ1fDlC4GpYc6rJWgnFY44BLiQPA0fPqdPX+S1u7/Cf3ClvRugQzWuoXzd684LaMTyVF0C1/5AnSJyKsDj+e+q7LwVwm74kdtS+QHRysHbduSSpoY35x7wuo9lN++zj1e8HZZoph9isRsEyrBqvAAcZJdh2xEC1fQmLJYxwbznfbtBvuGlzrUmAqXIHXd8UvbyQAVDACxJqRYL5fodyjwUKp3WI9li9wXr6rXrwpTMDgODwdd6vdUnGW6fP0gY9mbraf6gM2P9NV7kNqERdNfgPFHbdvECHkpvwLdRqFGv/aJ83q7vyN88ENKxiPIAW72jzr+EqB9E8aB+UzBjn3QnlnKLmbXFpY5jMbeF5RubIQJDGy3d4RQI73QCtjGM9blQ6lStmMK7s1Z2jExMFJhmZLkxiZgybvqHECxthp+sI8IrCtc9i4htWUF9567o3nDeR8";
     document.getElementById("ciphertext").value = cipherText;
 
     const password = document.getElementById("password").value;
