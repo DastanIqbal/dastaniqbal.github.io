@@ -165,7 +165,19 @@ async function startProcess() {
     output.textContent = "Decrypting response...";
 
     const decrypted = await decryptBase64Cipher(cipherText, password);
-    output.textContent = JSON.stringify(decrypted, null, 4);;
+    let formattedDecrypted;
+    
+    try {
+        formattedDecrypted = JSON.parse(decrypted);
+    } catch (error) {
+        formattedDecrypted = decrypted;
+    }
+    
+    const formattedJson = typeof formattedDecrypted === 'object' 
+        ? JSON.stringify(formattedDecrypted, null, 4) 
+        : formattedDecrypted;
+    
+    output.textContent = formattedJson;
   } catch (err) {
     output.textContent = "Error: " + err.message;
   }
