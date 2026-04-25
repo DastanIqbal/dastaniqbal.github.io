@@ -134,7 +134,7 @@ async function startProcess() {
   try {
     const githubRes = await fetch("https://raw.githubusercontent.com/bhhoomas/surfix/refs/heads/main/readme_istarpromax");
     const githubJson = await githubRes.json();
-    const proxy = "https://corsproxy.io/?url=";
+    const proxy = "https://cors-anywhere.herokuapp.com/";
     const hostUrl = proxy + githubJson.host;
 
     output.textContent = `Calling API...`;
